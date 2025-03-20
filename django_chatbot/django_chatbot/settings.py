@@ -52,6 +52,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_chatbot.urls'
 
+GEMINI_API_KEY = 'AIzaSyB-qkSg0T63QSuRRZbpeLEH9jgbGGylk-M'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
