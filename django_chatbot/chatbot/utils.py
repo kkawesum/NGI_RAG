@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KNOWLEDGE_FILE = os.path.join(BASE_DIR, "chatbot", "doc", "knowledge_base.txt")
 
 # Configure Gemini API
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Load and split documents
 def load_documents():
@@ -49,11 +49,15 @@ def generate_rag_response(user_query):
 
     print(type(relevant_docs))  # Should print <class 'list'>
     print(relevant_docs)  # See the full object structure
+    
+
+# ✅ Try using the correct model name
+    # model = genai.GenerativeModel  # Use this instead of "gemini-pro"
 
     # ✅ Extract text for Gemini
     context = " ".join([doc.page_content for doc in relevant_docs])
 
     # ✅ Query Gemini API
-    response = genai.GenerativeModel("gemini-pro").generate_content(f"Context: {context}\nUser: {user_query}")
-    
+    response = genai.GenerativeModel("gemini-1.5-pro").generate_content(f"Context: {context}\nUser: {user_query}")
+    # print(response)
     return response.text

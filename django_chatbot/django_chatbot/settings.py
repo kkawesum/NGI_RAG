@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "yourdomain.com"]
 
+LOGIN_URL = "/login/"  # Redirect users to this login page
+
 
 # Application definition
 
