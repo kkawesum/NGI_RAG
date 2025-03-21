@@ -1,0 +1,31 @@
+# What is Django?
+Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. It follows the Model-View-Template (MVT) architectural pattern.
+
+# Key Features of Django
+1. **Batteries-Included**: Comes with built-in tools like authentication, admin panel, and ORM.
+2. **Security**: Protects against SQL injection, CSRF, and XSS attacks.
+3. **Scalability**: Can handle high traffic websites.
+4. **ORM (Object-Relational Mapper)**: Simplifies database interactions.
+
+# What is RAG (Retrieval-Augmented Generation)?
+Retrieval-Augmented Generation (RAG) is an AI technique that combines information retrieval with text generation. It first retrieves relevant documents from a database and then generates a response based on the retrieved knowledge.
+
+# How does Django support AI development?
+Django supports AI and ML projects through:
+1. **REST APIs**: Integrates with AI models via Django Rest Framework.
+2. **Background Tasks**: Uses Celery for async AI processing.
+3. **Data Handling**: ORM makes it easy to interact with databases.
+
+# What is FAISS?
+FAISS (Facebook AI Similarity Search) is an open-source library for fast similarity search and clustering of dense vectors. It is used in RAG models for efficient retrieval of relevant documents.
+
+# How to deploy a Django chatbot?
+1. **Localhost**: `python manage.py runserver`
+2. **Docker**: Use `Dockerfile` and `docker-compose.yml`
+3. **Cloud Platforms**:
+   - **Heroku**: `git push heroku main`
+   - **AWS EC2**: Deploy with Gunicorn & Nginx.
+   - **Google Cloud**: Use Cloud Run or App Engine.
+
+# About Google Gemini AI
+Google Gemini AI is a powerful generative AI model designed for text, images, and code generation. It provides advanced reasoning, multi-modal support, and strong integration with Google Cloud services.
