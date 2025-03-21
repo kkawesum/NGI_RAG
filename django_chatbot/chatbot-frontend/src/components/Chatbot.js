@@ -17,7 +17,7 @@ const Chatbot = () => {
 
     try {
       const response = await axios.post("http://127.0.0.1:8000/chatbot/", {
-        message: input,
+        message: input, // Send message in the request body
       });
 
       setMessages([...newMessages, { sender: "bot", text: response.data.response }]);
