@@ -1,10 +1,11 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .utils import generate_rag_response
+from .utils import generate_rag_response,create_vector_store
 
 @csrf_exempt
 def chatbot_response(request):
+    create_vector_store()
     if request.method == "POST":
         data = json.loads(request.body)
         user_query = data.get("message", "")
