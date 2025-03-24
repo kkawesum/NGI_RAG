@@ -21,10 +21,11 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('chatbot.urls')),
-    # path('chatbot/', include('api.urls')),
+    path('chatbot/', include('api.urls')),
+    
 ]
 
-# Serve React index.html
-urlpatterns += [
-    path("chatbot/", TemplateView.as_view(template_name="index.html")),
-]
+# # Serve React index.html
+# urlpatterns += [
+#     path("chatbot/", TemplateView.as_view(template_name="index.html")),
+# ]

@@ -10,8 +10,12 @@ from django.utils import timezone
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
 
 
+def get_csrf_token(request):
+    return JsonResponse({"csrfToken": get_token(request)})
 
 
 @csrf_exempt
@@ -20,21 +24,16 @@ def hello_world(request):
         if request.method == "POST":
             # ✅ Extract message safely from form data
             # chats = Chat.objects.filter(user=request.user)
-            print(request.user)
+            print(request.user, request)
             message = request.POST.get('message')
-            response = generate_rag_response(message)        
+            response = generate_rag_response(message)
+            print(response.text)        
             chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now())
             chat.save()
-            return JsonResponse({'message': message, 'response': response})
+            if response:
+                return JsonResponse({'message': message, 'response': response})
         else:
             return render(request, 'index.html')
-            
-            # if not user_query:
-            #     return JsonResponse({"error": "Empty query"}, status=400)
-
-            # ✅ Generate response
-
-            
             
     except Exception as e:
         print("Error:", str(e))

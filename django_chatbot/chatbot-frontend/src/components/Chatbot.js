@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TextField, Button, Paper, Typography, Box, CircularProgress } from "@mui/material";
+import { getCSRFToken } from "./csrf"; // Import CSRF function
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([{ sender: "bot", text: "Hello! How can I help you?" }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getCSRFToken(); // Fetch token on component mount
+  }, []);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -16,10 +21,13 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/chatbot/", {
-        message: input, // Send message in the request body
-      });
-
+      const response = await axios.post(
+        "http://127.0.0.1:8000/chatbot/",
+        { message: input }, // Send message in request body
+        { headers: { "X-CSRFToken": axios.defaults.headers.common["X-CSRFToken"] }, withCredentials: true }
+      );
+      console.log("Chatbot input:", input);
+      console.log("Chatbot Response:", response.data.response);
       setMessages([...newMessages, { sender: "bot", text: response.data.response }]);
     } catch (error) {
       console.error("Error fetching chatbot response:", error);

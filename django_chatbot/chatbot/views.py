@@ -9,6 +9,8 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+
+
 vector_store = create_vector_store()
 # @login_required
 @csrf_exempt
@@ -17,8 +19,8 @@ def chatbot_response(request):
         if request.method == "POST":
             # ✅ Extract message safely from form data
             # chats = Chat.objects.filter(user=request.user)
-            print(request.user)
-            message = request.POST.get('message')
+            print(request.user, request.POST.get('messages'))
+            message = request.POST.get('messages')
             response = generate_rag_response(message)        
             chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now())
             chat.save()
@@ -76,3 +78,4 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
